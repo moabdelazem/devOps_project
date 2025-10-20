@@ -1,4 +1,3 @@
-// TODO : Pipeline script goes here
 pipeline {
     agent any
 
@@ -9,6 +8,7 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'
         IMAGE_NAME = 'moabdelazem/items-api'
+        KUBECONFIG_CREDENTIALS_ID = 'kubeconfig-credentials'
     }
 
     stages {
@@ -56,10 +56,35 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Use Kubernetes credentials
+                    withCredentials([file(credentialsId: env.KUBECONFIG_CREDENTIALS_ID, variable: 'KUBECONFIG')]) {
+                        // Apply database manifests
+                        sh 'kubectl apply -f k8s/database/'
+
+                        // Apply API manifests
+                        sh 'kubectl apply -f k8s/api/'
+
+                        // Verify deployments
+                        sh 'kubectl get pods -n default'
+                        sh 'kubectl get services -n default'
+
+                        // Rollout restart to pick up latest image
+                        sh 'kubectl rollout restart deployment/app-deployment -n default'
+                        sh 'kubectl rollout status deployment/app-deployment -n default'
+                    }
+                }
+            }
+        }
     }
     post {
         success {
             echo 'Pipeline completed successfully!'
+            sh "docker rmi ${env.IMAGE_NAME}:${env.BUILD_NUMBER} ${env.IMAGE_NAME}:latest"
+            cleanWs()
         }
         failure {
             echo 'Pipeline failed. Please check the logs.'
