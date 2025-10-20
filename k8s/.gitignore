@@ -1,0 +1,23 @@
+# Ignore raw Kubernetes secrets
+*secret.yaml
+*Secret.yaml
+*Secret.yml
+
+# Track Sealed Secrets (do not ignore)
+!sealed_*secret.yml
+!sealed-*secret.yaml
+!sealed-*secret.yml
+
+# Ignore temporary and backup files
+*.bak
+*.tmp
+
+# Ignore local configuration overrides
+local-*.yaml
+local-*.yml
+
+# Ignore Helm chart output (if used)
+charts/
+
+# Ignore Sealed Secrets private key (never commit this)
+sealed-secrets-key.pem

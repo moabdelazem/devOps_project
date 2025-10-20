@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  port: "6767"
+  db_host: "postgres-database-svc"
+  node-env: "production"
