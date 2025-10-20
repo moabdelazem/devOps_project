@@ -9,6 +9,7 @@ A simple RESTful API for managing items, built with TypeScript, Express, and Pos
 - Centralized error handling with custom `ApiError` class
 - Structured logging with Winston and HTTP logging with Morgan
 - Dockerized for easy deployment
+- Prometheus metrics endpoint for monitoring
 
 ## Quick Start
 
@@ -29,5 +30,8 @@ Environment variables are configured in `.env`.
 - `GET /items/:id` - Retrieve an item by ID
 - `PUT /items/:id` - Update an item by ID
 - `DELETE /items/:id` - Delete an item by ID
+
+- `GET /health` - Health check endpoint`
+- `GET /metrics` - Prometheus metrics endpoint
 
 ---
