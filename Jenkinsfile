@@ -47,12 +47,12 @@ pipeline {
                         sh "docker build -t ${imageName}:${imageTag} ."
                         sh "docker tag ${imageName}:${imageTag} ${imageName}:latest"
 
-                    // Login to Docker Hub and push
-                    // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    //     sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
-                    //     sh "docker push ${imageName}:${imageTag}"
-                    //     sh "docker push ${imageName}:latest"
-                    // }
+                        // Login to Docker Hub and push
+                        withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
+                            sh "docker push ${imageName}:${imageTag}"
+                            sh "docker push ${imageName}:latest"
+                        }
                     }
                 }
             }
