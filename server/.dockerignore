@@ -1,0 +1,19 @@
+# Database files
+database
+
+# Environment variables
+.env
+
+# Build output
+dist
+
+# Log files
+logs/
+
+# Dependency directories
+node_modules
+
+# Development files
+.devcontainer
+.vscode
+
