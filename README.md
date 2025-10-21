@@ -43,11 +43,11 @@ The project consists of a RESTful API built with Node.js, TypeScript, and Expres
 - [x] Create simple RESTful API using Node.js and Express that interacts with a PostgreSQL database
 - [x] Deploy the application to a Kubernetes cluster using regular Kubernetes manifests
 - [x] Use Sealed Secrets Operator for secure management of sensitive data
+- [x] Integrate the node prom-client library into the API for exposing metrics
+- [x] Implement CI/CD pipeline using Jenkins to automate testing and deployment
 
 ### In Progress
 
-- [ ] Integrate the node prom-client library into the API for exposing metrics
-- [ ] Implement CI/CD pipeline using Jenkins to automate testing and deployment
 - [ ] Set up monitoring and logging using Prometheus and Grafana
 - [ ] Document the entire process, including architecture diagrams, setup instructions, and usage guidelines
 - [ ] Write unit and integration tests for the API
